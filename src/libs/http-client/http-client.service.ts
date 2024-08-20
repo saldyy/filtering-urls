@@ -5,12 +5,15 @@ import { Injectable } from "@nestjs/common";
 export class HttpClient {
   async isValidUrl(url: string): Promise<boolean> {
     try {
-      const response = await axios.get(url, {
+      await axios.get(url, {
         maxRedirects: 0,
         timeout: 5000,
+        validateStatus(status) {
+          return status >= 200 && status < 300;
+        },
       });
 
-      return response.status >= 200 && response.status < 300;
+      return true;
     } catch (error) {
       return false;
     }
