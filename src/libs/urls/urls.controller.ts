@@ -15,7 +15,6 @@ export class UrlsController {
     @Body(new ZodValidationPipe(FilterUrlPayloadSchema))
     body: FilterUrlPayload,
   ) {
-    console.log(body);
     return this.filterUrlsService.filterUrls(body);
   }
 }
